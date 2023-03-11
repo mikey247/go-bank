@@ -13,4 +13,13 @@ migrateup:
 migratedown:
     migrate -path db/migration -database "postgresql://root:container_password@localhost:5432/db_name?sslmode=disable" -verbose down
 
+sqlc:
+    sqlc generate
+    
+build:
+    go build -v ./...
+
+test:
+    go test -v -cover ./...
+
 .PHONY: postgres createdb dropdb
