@@ -16,7 +16,7 @@ migratedown:
 	# migrate -path db/migration -database "postgresql://root:container_password@localhost:5432/db_name?sslmode=disable" -verbose down
 
 sqlc:
-	sqlc generate   
+	docker run --rm -v "%cd%:/src" -w /src kjconroy/sqlc generate
 
 build:
 	go build -v ./...
@@ -26,3 +26,6 @@ test:
 
 server:
 	go run main.go
+	
+mock:
+	mockgen -package mockdb -destination db/mock/store.go github.com/mikey247/go-bank/db/sqlc Store
